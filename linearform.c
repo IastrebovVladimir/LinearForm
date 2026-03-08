@@ -43,7 +43,7 @@ void setcoeff(LinearForm *line_form, size_t index, void *new_coeff) {
     }
 }
 
-static char *addition_op(const char *left_coeff, const char *right_coeff)
+static char *addition_op(const char *left_coeff, const char *right_coeff) // функция которая выдает операцию сложения left_coeff = a, right_coeff = b -> a+b
 {
     // left_coeff - строка левого коэфф., right_coeff - строка 2 коэфф
     const char *left_coeff_safe;
@@ -93,7 +93,7 @@ static char *addition_op(const char *left_coeff, const char *right_coeff)
 }
 
 
-static char *subtraction_op(const char *left_coeff, const char *right_coeff)
+static char *subtraction_op(const char *left_coeff, const char *right_coeff) // функция которая выдает операцию вычитания left_coeff = a, right_coeff = b -> a-b
 {
     // left_coeff - строка левого коэфф., right_coeff - строка 2 коэфф
     const char *left_coeff_safe;
@@ -159,7 +159,7 @@ static char *subtraction_op(const char *left_coeff, const char *right_coeff)
 }
 
 
-static char *neg_op(const char *str)
+static char *neg_op(const char *str) // функция которая превращает из a -> -a(или -a->a) в operations
 {
     // str - строка коэфф
     const char *str_safe;
@@ -215,7 +215,7 @@ static char *neg_op(const char *str)
     return result;
 }
 
-static char *scalar_op(const char *line_form, const char *scalar_str) {
+static char *scalar_op(const char *line_form, const char *scalar_str) { функция которая выдает операцию скаляра, при коэффициенте a+b и скаляре k выдает k*a + k*b
     if (!line_form || !scalar_str)
         return NULL;
     //line_form - строка коэфф. лин. формы, scalar+ptr
@@ -324,20 +324,20 @@ LinearForm *addition(const LinearForm* line_form1, const LinearForm* line_form2)
         num_max = line_form2->n;
         num_min = line_form1->n;
         formbuffer = line_form2;
-    }
+    } // вычисляем форму с мин. и макс. кол-вом коэффициентов
     LinearForm *newForm = createForm(line_form1->type, num_max);
     void *elem1, *elem2, *elem_new;
-    for (index = 0; index < num_min; index++) {
-        elem1 = (char*)line_form1->coeffs + index * line_form1->type->size;
-        elem2 = (char*)line_form2->coeffs + index * line_form1->type->size;
-        elem_new = (char*)newForm->coeffs + index * line_form1->type->size;
-        newForm->type->sum(elem1, elem2, elem_new);
+    for (index = 0; index < num_min; index++) { // проходим от 0 элемента до num_min не включительно, Так как тут будут коэффициенты у 1 и 2 формы
+        elem1 = (char*)line_form1->coeffs + index * line_form1->type->size; // элемент 1 формы
+        elem2 = (char*)line_form2->coeffs + index * line_form1->type->size; // элемент 2 формы
+        elem_new = (char*)newForm->coeffs + index * line_form1->type->size; // элемент суммирующей формы
+        newForm->type->sum(elem1, elem2, elem_new); // записываем в elem_new сумму 2 элементов
 
         if (newForm->operations && line_form1->operations && line_form2->operations) {
-            char *temp = addition_op(line_form1->operations[index],line_form2->operations[index]);
+            char *temp = addition_op(line_form1->operations[index],line_form2->operations[index]); // записываем в temp операцию сложения 1 и 2 формы
             if (temp) {
-                free(newForm->operations[index]);
-                newForm->operations[index] = temp;
+                free(newForm->operations[index]); // освобождаем операции в newForm
+                newForm->operations[index] = temp; // записываем туда temp
             }
         }
 
@@ -345,7 +345,7 @@ LinearForm *addition(const LinearForm* line_form1, const LinearForm* line_form2)
     for (index = num_min; index < num_max; index++) {
         elem1 = (char*)formbuffer->coeffs + index * line_form1->type->size;
         elem_new = (char*)newForm->coeffs + index * line_form1->type->size;
-        memcpy(elem_new, elem1, newForm->type->size);
+        memcpy(elem_new, elem1, newForm->type->size); // от num_min до num_max коэффициентов у одной из форм не будет, поэтому просто копируем элемент и потом историю
         if (newForm->operations && formbuffer->operations) {
             free(newForm->operations[index]);
             if (formbuffer->operations[index])
@@ -371,29 +371,29 @@ LinearForm *subtraction(const LinearForm* line_form1, const LinearForm* line_for
         num_max = line_form2->n;
         num_min = line_form1->n;
         formbuffer = line_form2;
-    }
+    } // вычисляем форму с мин. и макс. кол-вом коэффициентов
     LinearForm *newForm = createForm(line_form1->type, num_max);
     void *elem1, *elem2, *elem_new;
     for (index = 0; index < num_min; index++) {
-        elem1 = (char*)line_form1->coeffs + index * line_form1->type->size;
-        elem2 = (char*)line_form2->coeffs + index * line_form1->type->size;
-        elem_new = (char*)newForm->coeffs + index * line_form1->type->size;
-        newForm->type->sub(elem1, elem2, elem_new);
+        elem1 = (char*)line_form1->coeffs + index * line_form1->type->size; // элемент 1 формы
+        elem2 = (char*)line_form2->coeffs + index * line_form1->type->size; // элемент 2 формы
+        elem_new = (char*)newForm->coeffs + index * line_form1->type->size; // элемент разности форм
+        newForm->type->sub(elem1, elem2, elem_new); // записываем в elem_new разность 2 элементов
 
         if (newForm->operations && line_form1->operations && line_form2->operations) {
-            char *temp = subtraction_op(line_form1->operations[index],line_form2->operations[index]);
+            char *temp = subtraction_op(line_form1->operations[index],line_form2->operations[index]); // записываем в temp операцию разности 1 и 2 формы
             if (temp) {
-                free(newForm->operations[index]);
-                newForm->operations[index] = temp;
+                free(newForm->operations[index]); // освобождаем историю операций в newForm
+                newForm->operations[index] = temp; // записываем туда temp
             }
         }
 
     }
-    if (formbuffer == line_form1)
+    if (formbuffer == line_form1) //если у 1 формы больше коэффициентов то мы просто копируем в operations новой формы историю операций 1 формы
         for (index = num_min; index < num_max; index++) {
             elem1 = (char *) formbuffer->coeffs + index * line_form1->type->size;
             elem_new = (char *) newForm->coeffs + index * line_form1->type->size;
-            memcpy(elem_new, elem1, newForm->type->size);
+            memcpy(elem_new, elem1, newForm->type->size); // от num_min до num_max коэффициентов у одной из форм не будет, поэтому просто копируем элемент и потом историю
 
             if (newForm->operations && formbuffer->operations) {
                 free(newForm->operations[index]);
@@ -403,17 +403,17 @@ LinearForm *subtraction(const LinearForm* line_form1, const LinearForm* line_for
                     newForm->operations[index] = NULL;
             }
         }
-    else {
+    else { // если у 2 формы больше коэффициентов, то нам нужно поменять в операциях 2 формы плюс на минус и наоборот
         for (index = num_min; index < num_max; index++) {
             elem1 = (char *)formbuffer->coeffs + index * line_form1->type->size;
             elem_new = (char *)newForm->coeffs + index * line_form1->type->size;
-            memcpy(elem_new, elem1, line_form1->type->size);
-            newForm->type->neg(elem_new);
+            memcpy(elem_new, elem1, line_form1->type->size);  // от num_min до num_max коэффициентов у одной из форм не будет, поэтому просто копируем элемент
+            newForm->type->neg(elem_new); // после копирования элемента умножаем его на -1
 
             if (newForm->operations && formbuffer->operations) {
                 free(newForm->operations[index]);
                 if (formbuffer->operations[index])
-                    newForm->operations[index] = neg_op(formbuffer->operations[index]);
+                    newForm->operations[index] = neg_op(formbuffer->operations[index]); //если есть операции в formbuffer, то в operations записываем преобразованную операцию formbuffer
                 else
                     newForm->operations[index] = NULL;
             }
