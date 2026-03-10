@@ -39,9 +39,12 @@ void setcoeff(LinearForm *line_form, size_t index, void *new_coeff) {
         memcpy(elem, new_coeff, line_form->type->size);
         const char *str = line_form->type->to_string(new_coeff);
         char *copy = malloc(strlen(str) + 1);
-        if (!copy)
+        if (!copy) {
+            free((void*)str);      
             return;
+        }
         memcpy(copy, str, strlen(str) + 1);
+        free((void*)str);
         free(line_form->operations[index]);
         line_form->operations[index] = copy;
     }
