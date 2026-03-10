@@ -205,7 +205,7 @@ static char *neg_op(const char *str) // функция которая превр
         str_len--;
     }
 
-    char *result = malloc(str_len + 1); // результирующая строка "-str"
+    char *result = malloc(str_len + 2); // результирующая строка "-str"
     if (!result) {
         free(flipped);
         return NULL;
