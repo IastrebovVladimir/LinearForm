@@ -447,6 +447,7 @@ void scalar(LinearForm* line_form, void* factor) {
                  }
             }
         }
+        free((void*)scalar_str);
     }
 }
 
