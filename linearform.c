@@ -121,7 +121,7 @@ static char *subtraction_op(const char *left_coeff, const char *right_coeff) // 
     if (left_len == 0 && right_len == 0) // нет смысла создавать, если оба пустые
         return NULL;
 
-    char *flipped_right = malloc(right_len + 1); // правый коэффициент с измененными знаками
+    char *flipped_right = malloc(right_len + 2); // правый коэффициент с измененными знаками
     if (!flipped_right)
         return NULL;
 
@@ -179,7 +179,7 @@ static char *neg_op(const char *str) // функция которая превр
     if (str_len == 0) // нет смысла создавать, если строка пустая
         return NULL;
 
-    char *flipped = malloc(str_len + 1); // коэффициент с измененными знаками
+    char *flipped = malloc(str_len + 2); // коэффициент с измененными знаками
     if (!flipped)
         return NULL;
 
@@ -205,7 +205,7 @@ static char *neg_op(const char *str) // функция которая превр
         str_len--;
     }
 
-    char *result = malloc(str_len + 2); // результирующая строка "-str"
+    char *result = malloc(str_len + 1); // результирующая строка "-str"
     if (!result) {
         free(flipped);
         return NULL;
