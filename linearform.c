@@ -215,7 +215,7 @@ static char *neg_op(const char *str) // функция которая превр
     return result;
 }
 
-static char *scalar_op(const char *line_form, const char *scalar_str) { функция которая выдает операцию скаляра, при коэффициенте a+b и скаляре k выдает k*a + k*b
+static char *scalar_op(const char *line_form, const char *scalar_str) { // функция которая выдает операцию скаляра, при коэффициенте a+b и скаляре k выдает k*a + k*b
     if (!line_form || !scalar_str)
         return NULL;
     //line_form - строка коэфф. лин. формы, scalar+ptr
