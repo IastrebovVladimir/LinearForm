@@ -27,6 +27,10 @@ void deleteForm(LinearForm *line_form) {
             free(line_form->operations[index]);
         free(line_form->operations);
     }
+
+    if (line_form->coeffs)
+        free(line_form->coeffs);
+    
     free(line_form);
 }
 void setcoeff(LinearForm *line_form, size_t index, void *new_coeff) {
