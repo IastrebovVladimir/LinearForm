@@ -214,7 +214,7 @@ static char *neg_op(const char *str) // функция которая превр
     free(flipped);
     return result;
 }
-
+// функция которая выдает операцию скаляра, при коэффициенте a+b и скаляре k выдает k*a + k*b
 static char *scalar_op(const char *line_form, const char *scalar_str) {
     if (!line_form || !scalar_str)
         return NULL;
