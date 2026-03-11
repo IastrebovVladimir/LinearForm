@@ -429,7 +429,7 @@ LinearForm *subtraction(const LinearForm* line_form1, const LinearForm* line_for
     return newForm;
 }
 
-void scalar(LinearForm* line_form, void* factor) {
+void scaleForm(LinearForm* line_form, void* factor) {
     if (line_form) {
         void *elem;
         const char* scalar_str = line_form->type->to_string(factor);
