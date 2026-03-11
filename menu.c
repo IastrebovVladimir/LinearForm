@@ -177,7 +177,7 @@ void case_value_form(LinearForm *line_form, const TypeInfo *t) {
         return;
     }
 
-    valueForm(line_form, args, n_local, result);
+    evaluateForm(line_form, args, n_local, result);
 
     printf("Value is: ");
     t->print(result);
@@ -205,4 +205,5 @@ void case_operations(LinearForm *line_form) {
             printf("(0)x%d\n", index);
         }
     }
+
 }
