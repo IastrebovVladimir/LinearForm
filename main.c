@@ -66,7 +66,7 @@ int main(void) {
                 break;
 
             case 8:
-                case_value_form(line_form, t);
+                case_evaluate_form(line_form, t);
                 break;
 
             case 9:
