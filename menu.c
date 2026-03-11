@@ -131,7 +131,7 @@ void case_substraction(LinearForm **line_form, const TypeInfo *t, int *n) {
     printf("Subtraction completed\n");
 }
 
-void case_scalar(LinearForm *line_form, const TypeInfo *t) {
+void case_scale(LinearForm *line_form, const TypeInfo *t) {
     if (!line_form) {
         printf("Form is not created\n");
         return;
@@ -144,7 +144,7 @@ void case_scalar(LinearForm *line_form, const TypeInfo *t) {
     printf("Enter scalar (it must be of the same type as the form): ");
     while (!t->scan(multiplier))
         printf("Error! Enter scalar (it must be of the same type as the form): ");
-    scalar(line_form, multiplier);
+    scaleForm(line_form, multiplier);
     free(multiplier);
 }
 
@@ -207,4 +207,5 @@ void case_operations(LinearForm *line_form) {
     }
 
 }
+
 
