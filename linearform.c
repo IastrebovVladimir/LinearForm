@@ -429,7 +429,7 @@ LinearForm *subtraction(const LinearForm* line_form1, const LinearForm* line_for
     return newForm;
 }
 
-void scaleForm(LinearForm* line_form, void* factor) {
+void scaleForm(LinearForm* line_form, void* factor) { // функция, умножающая все коэффициенты формы на скаляр k: a1, a2, ..., an -> k*a1, k*a2, ..., k*an
     if (line_form) {
         void *elem;
         const char* scalar_str = line_form->type->to_string(factor);
@@ -452,9 +452,12 @@ void scaleForm(LinearForm* line_form, void* factor) {
 }
 
 void evaluateForm(const LinearForm* line_form, const void* args, size_t n_args, void* result) {
+    // вычисляет значение линейной формы a1x1 + a2x2 + ... + anxn при подстановке t1, t2, ..., tn из args вместо x1, x2, ..., xn
     if (!line_form || !args || line_form->n != n_args)
         return;
     void* factor = malloc(line_form->type->size);
+    if (!factor)
+        return;
     line_form->type->zero(result);
     void *elem, *arg_i;
     for (size_t index = 0; index < line_form->n; index++) {
