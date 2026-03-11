@@ -62,7 +62,7 @@ int main(void) {
                 break;
 
             case 7:
-                case_scalar(line_form, t);
+                case_scale_form(line_form, t);
                 break;
 
             case 8:
