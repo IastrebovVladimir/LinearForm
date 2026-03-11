@@ -111,7 +111,7 @@ static char *subtraction_op(const char *left_coeff, const char *right_coeff) {
     size_t write_position = 0;
 
     if (right_len > 0 && right_coeff_safe[0] != '-') {
-        flipped_right[write_position] = '-'; // нет минуса в начале: b -> -b
+        flipped_right[write_position] = '-'; // нет минуса в начале: a -> -a
         write_position++;
     }
 
