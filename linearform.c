@@ -222,7 +222,7 @@ static char *neg_op(const char *str) // функция которая превр
     return result;
 }
 // функция которая выдает операцию скаляра, при коэффициенте a+b и скаляре k выдает k*a + k*b
-static char *scalar_op(const char *line_form, const char *scalar_str) {
+static char *scale_op(const char *line_form, const char *scalar_str) {
     if (!line_form || !scalar_str)
         return NULL;
     //line_form - строка коэфф. лин. формы, scalar+ptr
@@ -437,7 +437,7 @@ void scaleForm(LinearForm* line_form, void* factor) {
             elem = (char*)line_form->coeffs + index * line_form->type->size;
             line_form->type->mul(elem, factor, elem);
             if (line_form->operations && line_form->operations[index]) {
-                char *new_str = scalar_op(line_form->operations[index], scalar_str);
+                char *new_str = scale_op(line_form->operations[index], scalar_str);
                 if (new_str) {
                     free(line_form->operations[index]);
                     line_form->operations[index] = new_str;
