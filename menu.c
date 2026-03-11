@@ -131,7 +131,7 @@ void case_substraction(LinearForm **line_form, const TypeInfo *t, int *n) {
     printf("Subtraction completed\n");
 }
 
-void case_scale(LinearForm *line_form, const TypeInfo *t) {
+void case_scale_form(LinearForm *line_form, const TypeInfo *t) {
     if (!line_form) {
         printf("Form is not created\n");
         return;
@@ -207,5 +207,6 @@ void case_operations(LinearForm *line_form) {
     }
 
 }
+
 
 
