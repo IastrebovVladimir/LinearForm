@@ -19,7 +19,7 @@ int test_create_and_value_int(void) {
 
     int args[3] = {10, 1, -2};
     int result = 0;
-    valueForm(f, args, 3, &result);
+    evaluateForm(f, args, 3, &result);
 
     ASSERT_INT_EQ(6, result);
 
@@ -70,7 +70,7 @@ int test_addition_int(void) {
 
     int args[3] = {1, 1, 1};
     int res = 0;
-    valueForm(sum, args, 3, &res);
+    evaluateForm(sum, args, 3, &res);
 
     ASSERT_INT_EQ(9, res);
 
@@ -100,7 +100,7 @@ int test_subtraction_int(void) {
 
     int args[2] = {1, 1};
     int res = 0;
-    valueForm(diff, args, 2, &res);
+    evaluateForm(diff, args, 2, &res);
 
     ASSERT_INT_EQ(-4, res);
 
@@ -314,4 +314,5 @@ int test_addition_types(void) {
     deleteForm(f2);
     return 1;
 }
+
 
