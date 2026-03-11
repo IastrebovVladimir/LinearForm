@@ -259,8 +259,8 @@ int test_scalar_op_int(void) {
     int k = 2;
     scaleForm(h, &k);
     ASSERT_TRUE(h->operations[0] && h->operations[1]);
-    ASSERT_INT_EQ(0, strcmp(h->operations[0], "2*1+2*3-2*0+2*2"));
-    ASSERT_INT_EQ(0, strcmp(h->operations[1], "2*2-2*1-2*4-2*5"));
+    ASSERT_INT_EQ(0, strcmp(h->operations[0], "2*(1+3-0+2)"));
+    ASSERT_INT_EQ(0, strcmp(h->operations[1], "2*(2-1-4-5)"));
 
     int args[2] = {1, 1};
     int result = 0;
@@ -314,6 +314,7 @@ int test_addition_types(void) {
     deleteForm(f2);
     return 1;
 }
+
 
 
 
