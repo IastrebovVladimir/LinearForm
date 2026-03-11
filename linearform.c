@@ -451,7 +451,7 @@ void scalar(LinearForm* line_form, void* factor) {
     }
 }
 
-void valueForm(const LinearForm* line_form, const void* args, size_t n_args, void* result) {
+void evaluateForm(const LinearForm* line_form, const void* args, size_t n_args, void* result) {
     if (!line_form || !args || line_form->n != n_args)
         return;
     void* factor = malloc(line_form->type->size);
