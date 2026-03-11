@@ -37,7 +37,7 @@ int test_scalar_int(void) {
     setcoeff(f, 1, &c1);
 
     int k = 5;
-    scalar(f, &k);
+    scaleForm(f, &k);
 
     int args[2] = {1, 1};
     int result = 0;
@@ -119,7 +119,7 @@ int test_scalar_and_value_int(void) {
     setcoeff(f, 1, &c1);
 
     int k = 3;
-    scalar(f, &k);
+    scaleForm(f, &k);
 
     int args[2] = {2, 1};
     int res = 0;
@@ -257,7 +257,7 @@ int test_scalar_op_int(void) {
     ASSERT_TRUE(s1 && s2 && h);
 
     int k = 2;
-    scalar(h, &k);
+    scaleForm(h, &k);
     ASSERT_TRUE(h->operations[0] && h->operations[1]);
     ASSERT_INT_EQ(0, strcmp(h->operations[0], "2*1+2*3-2*0+2*2"));
     ASSERT_INT_EQ(0, strcmp(h->operations[1], "2*2-2*1-2*4-2*5"));
@@ -314,6 +314,7 @@ int test_addition_types(void) {
     deleteForm(f2);
     return 1;
 }
+
 
 
 
