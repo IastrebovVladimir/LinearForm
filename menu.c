@@ -148,7 +148,7 @@ void case_scalar(LinearForm *line_form, const TypeInfo *t) {
     free(multiplier);
 }
 
-void case_value_form(LinearForm *line_form, const TypeInfo *t) {
+void case_evaluate_form(LinearForm *line_form, const TypeInfo *t) {
     int index;
     if (!line_form) {
         printf("Form is not created\n");
@@ -207,3 +207,4 @@ void case_operations(LinearForm *line_form) {
     }
 
 }
+
