@@ -41,7 +41,7 @@ int test_scalar_int(void) {
 
     int args[2] = {1, 1};
     int result = 0;
-    valueForm(f, args, 2, &result);
+    evaluateForm(f, args, 2, &result);
 
     ASSERT_INT_EQ(-5, result);
 
@@ -123,7 +123,7 @@ int test_scalar_and_value_int(void) {
 
     int args[2] = {2, 1};
     int res = 0;
-    valueForm(f, args, 2, &res);
+    evaluateForm(f, args, 2, &res);
 
     ASSERT_INT_EQ(0, res);
 
@@ -264,7 +264,7 @@ int test_scalar_op_int(void) {
 
     int args[2] = {1, 1};
     int result = 0;
-    valueForm(h, args, 2, &result);
+    evaluateForm(h, args, 2, &result);
     ASSERT_INT_EQ(-4, result);
 
     deleteForm(f1);
@@ -314,5 +314,6 @@ int test_addition_types(void) {
     deleteForm(f2);
     return 1;
 }
+
 
 
