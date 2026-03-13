@@ -109,6 +109,7 @@ static char *subtraction_op(const char *left_coeff, const char *right_coeff) {
 
     size_t read_position  = 0;
     size_t write_position = 0;
+    size_t scopes_open = 0; // количество открытых скобок, например ((a+b - 2 открытые скобки, ((a+b) - 1 открытая скобка, ((a+b)+c) - 0 открытых скобок
 
     if (right_len > 0 && right_coeff_safe[0] != '-') {
         flipped_right[write_position] = '-'; // нет минуса в начале: a -> -a
@@ -117,12 +118,18 @@ static char *subtraction_op(const char *left_coeff, const char *right_coeff) {
 
     for (; read_position < right_len; read_position++, write_position++) {
         char symbol = right_coeff_safe[read_position];
-        if (symbol == '+') // - * + = -
+        if (symbol == '+' && scopes_open == 0) // - * + = - если у нас есть выражение типа (a+b) - То он проверяет кол-во открытых скобок и если уже scopes_open > 0, то скобки открыты.
+            // (a+b) -> -(a+b), scopes_open нужен чтобы внутри скобок ничего не менять, иначе выражение будет неверным
             flipped_right[write_position] = '-';
-        else if (symbol == '-') // - * - = +
+        else if (symbol == '-' && scopes_open == 0) // - * - = +
             flipped_right[write_position] = '+';
-        else
+        else {
+            if (symbol == '(')
+                scopes_open++;
+            if (symbol == ')')
+                scopes_open--;
             flipped_right[write_position] = symbol;
+        }
     }
 
     flipped_right[write_position] = '\0';
