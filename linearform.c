@@ -56,7 +56,7 @@ static char *addition_op(const char *left_coeff, const char *right_coeff) // ф�
     const char *left_coeff_safe = left_coeff ? left_coeff  : "";
     const char *right_coeff_safe = right_coeff ? right_coeff : "";
 
-    size_t left_len  = strlen(left_coeff_safe); // длина левого коэффициента
+    size_t left_len = strlen(left_coeff_safe); // длина левого коэффициента
     size_t right_len = strlen(right_coeff_safe); // длина правого коэффициента
 
     if (left_len == 0 && right_len == 0) //нет смысла создавать если они оба пустые
